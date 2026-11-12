@@ -22,7 +22,7 @@
 
 // La pagina entera
 body {
-    font-family: "Poppins", Arial, sans-serif;   // la fuente de Google Fonts; si no carga, Arial
+    font-family: "Overpass", Arial, sans-serif;  // la fuente de Google Fonts; si no carga, Arial
     background-color: $color-fondo;              // fondo claro (variable de Sass)
     color: $color-texto;                         // color de la letra
 }
@@ -230,4 +230,20 @@ a[target="_blank"] {
     border-color: $color-acento;            // borde azul
     border-left: 6px solid $color-acento;   // borde grueso a la izquierda
     border-radius: $radio;                  // esquinas redondeadas
+}
+
+// --- Pagina Nosotros: la imagen de cada integrante ---
+.foto-integrante {
+    display: block;                  // en su propia linea, para poder centrarla
+    width: 120px;                    // ancho fijo
+    height: 120px;                   // alto fijo (igual al ancho: queda un circulo)
+    margin: 0 auto 16px;             // centrada, con 16px de espacio debajo
+    border: 4px solid $color-suave;  // borde con el color suave de la paleta
+    border-radius: 50%;              // 50 % = circulo
+    box-shadow: $sombra;             // sombra suave
+    transition: transform 0.3s;      // el cambio de tamano sera suave
+
+    .tarjeta:hover & {               // cuando el mouse esta sobre la tarjeta...
+        transform: scale(1.08);      // ...la imagen crece un poco
+    }
 }
