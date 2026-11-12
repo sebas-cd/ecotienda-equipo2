@@ -1,22 +1,25 @@
 :root {
-  --color-principal: #1B5E20;
-  --color-acento: #F9A825;
-  --color-suave: #DDEBDD;
+  --color-principal: #4B6B03;
+  --color-acento: #4E90F5;
+  --color-suave: #9EBEED;
+  --color-fondo: #F3F6F3;
+  --color-texto: #2E4302;
+  --color-resalte: #94C000;
 }
 
 body {
   font-family: "Poppins", Arial, sans-serif;
-  background-color: #F4F7F2;
-  color: #1F2933;
+  background-color: #F3F6F3;
+  color: #2E4302;
 }
 
 h1, h2, h3 {
-  color: #1B5E20;
+  color: #4B6B03;
   font-weight: 700;
 }
 
 .encabezado {
-  background-color: #1B5E20;
+  background-color: #4B6B03;
   margin-bottom: 24px;
   padding: 24px;
   border-radius: 12px;
@@ -26,7 +29,7 @@ h1, h2, h3 {
   color: white;
 }
 .encabezado p {
-  color: #E3F2E3;
+  color: #F3F6F3;
 }
 @media (max-width: 576px) {
   .encabezado {
@@ -41,7 +44,7 @@ h1, h2, h3 {
   background-color: white;
   padding: 16px 24px;
   margin-bottom: 24px;
-  border-left: 6px solid #F9A825;
+  border-left: 6px solid #4E90F5;
   border-radius: 12px;
 }
 
@@ -65,10 +68,10 @@ h1, h2, h3 {
 }
 .menu > a:hover {
   background-color: white;
-  color: #1B5E20;
+  color: #4B6B03;
 }
 .menu > a:focus {
-  outline: 3px solid #F9A825;
+  outline: 3px solid #F3F6F3;
 }
 
 .tarjetas {
@@ -90,7 +93,7 @@ h1, h2, h3 {
 
 .tarjeta {
   background-color: white;
-  border: 1px solid #DDEBDD;
+  border: 1px solid #9EBEED;
   padding: 16px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
@@ -100,14 +103,14 @@ h1, h2, h3 {
   transform: translateY(-6px);
 }
 .tarjeta:first-child {
-  border-top: 6px solid #F9A825;
+  border-top: 6px solid #4E90F5;
 }
 .tarjeta p:nth-child(2) {
   min-height: 48px;
 }
 
 .precio {
-  color: #1B5E20;
+  color: #4B6B03;
   font-size: 1.3rem;
   font-weight: 700;
 }
@@ -116,12 +119,12 @@ h1, h2, h3 {
   display: inline-block;
   padding: 2px 10px;
   border-radius: 999px;
-  background-color: #DDEBDD;
+  background-color: #9EBEED;
   font-size: 0.8rem;
 }
 
 .ahorro {
-  color: #2E7D32;
+  color: #4B6B03;
   font-weight: 700;
 }
 
@@ -133,15 +136,15 @@ h1, h2, h3 {
 }
 
 .filtro {
-  border: 2px solid #1B5E20;
+  border: 2px solid #4B6B03;
   background-color: white;
-  color: #1B5E20;
+  color: #4B6B03;
   padding: 6px 16px;
   border-radius: 999px;
   transition: background-color 0.3s;
 }
 .filtro:hover, .filtro.activo {
-  background-color: #1B5E20;
+  background-color: #4B6B03;
   color: white;
 }
 
@@ -159,7 +162,7 @@ h1, h2, h3 {
 
 #carrito {
   background-color: white;
-  border: 2px solid #F9A825;
+  border: 2px solid #4E90F5;
   padding: 16px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
@@ -168,29 +171,29 @@ h1, h2, h3 {
 }
 
 a[target=_blank] {
-  color: #1B5E20;
+  color: #4B6B03;
   font-weight: 700;
 }
 
 .pie {
   margin-top: 24px;
   padding-top: 12px;
-  border-top: 1px solid #DDEBDD;
-  color: #52606D;
+  border-top: 1px solid #9EBEED;
+  color: #4B6B03;
   font-size: 0.9rem;
 }
 
 .btn-primary {
   --bs-btn-bg: var(--color-principal);
   --bs-btn-border-color: var(--color-principal);
-  --bs-btn-hover-bg: var(--color-acento);
-  --bs-btn-hover-border-color: var(--color-acento);
-  --bs-btn-hover-color: #1F2933;
+  --bs-btn-hover-bg: var(--color-resalte);
+  --bs-btn-hover-border-color: var(--color-resalte);
+  --bs-btn-hover-color: #2E4302;
 }
 
 .alert-warning {
-  background-color: #FFF8E1;
-  border-color: #F9A825;
-  border-left: 6px solid #F9A825;
+  background-color: #9EBEED;
+  border-color: #4E90F5;
+  border-left: 6px solid #4E90F5;
   border-radius: 12px;
 }

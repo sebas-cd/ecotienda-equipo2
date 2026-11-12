@@ -1,5 +1,5 @@
 // =============================================================
-// Hoja de estilos de EcoTienda, escrita en Sass.
+// Hoja de estilos de la tienda, escrita en Sass.
 // Se compila a css/estilos.css con:
 //     npx sass scss/estilos.scss css/estilos.css --no-source-map
 // El navegador NO lee este archivo: lee el .css que produce Sass.
@@ -15,6 +15,9 @@
     --color-principal: #{$color-principal};   // #{ } escribe el valor de la variable de Sass
     --color-acento: #{$color-acento};
     --color-suave: #{$color-suave};
+    --color-fondo: #{$color-fondo};
+    --color-texto: #{$color-texto};
+    --color-resalte: #{$color-resalte};
 }
 
 // La pagina entera
@@ -26,13 +29,13 @@ body {
 
 // Los titulos
 h1, h2, h3 {
-    color: $color-principal;    // en verde oscuro
+    color: $color-principal;    // en verde musgo oscuro
     font-weight: 700;           // en negrilla
 }
 
 // --- ANIDAMIENTO: las reglas de adentro solo aplican dentro de .encabezado ---
 .encabezado {
-    background-color: $color-principal;   // fondo verde oscuro
+    background-color: $color-principal;   // fondo verde musgo oscuro
     margin-bottom: 24px;                  // espacio debajo
     @include caja(24px);            // el mixin con 24px de relleno
 
@@ -41,7 +44,7 @@ h1, h2, h3 {
     }
 
     p {                             // se compila como .encabezado p
-        color: #E3F2E3;             // texto en verde muy claro
+        color: $color-fondo;         // texto en blanco
     }
 
     @media (max-width: $celular) {  // la media query tambien se anida
@@ -58,7 +61,7 @@ h1, h2, h3 {
     background-color: white;                // fondo blanco
     padding: 16px 24px;                     // relleno: 16px arriba y abajo, 24px a los lados
     margin-bottom: 24px;                    // espacio debajo
-    border-left: 6px solid $color-acento;   // borde amarillo solo a la izquierda
+    border-left: 6px solid $color-acento;   // borde azul solo a la izquierda
     border-radius: $radio;                  // esquinas redondeadas
 }
 
@@ -82,11 +85,11 @@ h1, h2, h3 {
 
         &:hover {                   // & = el selector de afuera: .menu > a:hover
             background-color: white;        // con el mouse encima: fondo blanco...
-            color: $color-principal;        // ...y letra verde
+            color: $color-principal;        // ...y letra verde musgo oscuro
         }
 
         &:focus {                   // .menu > a:focus: se llego con la tecla Tab
-            outline: 3px solid $color-acento;   // contorno amarillo
+            outline: 3px solid $color-fondo;    // contorno blanco (se ve sobre el verde musgo oscuro)
         }
     }
 }
@@ -110,7 +113,7 @@ h1, h2, h3 {
 // Cada tarjeta
 .tarjeta {
     background-color: white;            // fondo blanco
-    border: 1px solid $color-suave;     // borde fino verde claro
+    border: 1px solid $color-suave;     // borde fino azul claro
     @include caja;                  // el mixin con su valor por defecto (16px)
     transition: transform 0.3s;     // el movimiento sera suave
 
@@ -119,7 +122,7 @@ h1, h2, h3 {
     }
 
     &:first-child {                 // .tarjeta:first-child: la primera tarjeta
-        border-top: 6px solid $color-acento;   // borde amarillo grueso arriba
+        border-top: 6px solid $color-acento;   // borde azul grueso arriba
     }
 
     p:nth-child(2) {                // .tarjeta p:nth-child(2): el segundo hijo, si es un p
@@ -129,7 +132,7 @@ h1, h2, h3 {
 
 // El precio de cada producto
 .precio {
-    color: $color-principal;    // en verde oscuro
+    color: $color-principal;    // en verde musgo oscuro
     font-size: 1.3rem;          // 1,3 veces el tamano normal
     font-weight: 700;           // en negrilla
 }
@@ -140,13 +143,13 @@ h1, h2, h3 {
     display: inline-block;          // ocupa solo el ancho de su texto
     padding: 2px 10px;              // relleno pequeno
     border-radius: 999px;           // forma de pildora
-    background-color: $color-suave; // fondo verde claro
+    background-color: $color-suave; // fondo azul claro
     font-size: 0.8rem;              // letra pequena
 }
 
 // El ahorro (kWh y pesos)
 .ahorro {
-    color: #2E7D32;         // en verde
+    color: $color-principal; // en verde musgo oscuro
     font-weight: 700;       // en negrilla
 }
 
@@ -160,16 +163,16 @@ h1, h2, h3 {
 
 // Cada boton de filtro
 .filtro {
-    border: 2px solid $color-principal;   // borde verde
+    border: 2px solid $color-principal;   // borde verde musgo oscuro
     background-color: white;              // fondo blanco
-    color: $color-principal;              // letra verde
+    color: $color-principal;              // letra verde musgo oscuro
     padding: 6px 16px;                    // relleno
     border-radius: 999px;                 // forma de pildora
     transition: background-color 0.3s;    // cambio de fondo suave
 
     &:hover,
     &.activo {                      // &.activo = .filtro.activo: el boton elegido
-        background-color: $color-principal;   // con el mouse encima o elegido: fondo verde...
+        background-color: $color-principal;   // con el mouse encima o elegido: fondo verde musgo oscuro...
         color: white;                         // ...y letra blanca
     }
 }
@@ -189,7 +192,7 @@ h1, h2, h3 {
 // El carrito
 #carrito {
     background-color: white;            // fondo blanco
-    border: 2px solid $color-acento;    // borde amarillo
+    border: 2px solid $color-acento;    // borde azul
     @include caja;                      // relleno, esquinas y sombra (el mixin)
     position: sticky;               // el carrito se queda visible al bajar
     top: 16px;                      // a 16px del borde de arriba de la pantalla
@@ -197,7 +200,7 @@ h1, h2, h3 {
 
 // Los enlaces que abren otra pestana
 a[target="_blank"] {
-    color: $color-principal;    // en verde oscuro
+    color: $color-principal;    // en verde musgo oscuro
     font-weight: 700;           // en negrilla
 }
 
@@ -206,7 +209,7 @@ a[target="_blank"] {
     margin-top: 24px;                   // espacio encima
     padding-top: 12px;                  // relleno arriba
     border-top: 1px solid $color-suave; // linea fina arriba
-    color: #52606D;                     // letra gris
+    color: $color-principal;             // letra verde musgo oscuro
     font-size: 0.9rem;                  // letra un poco mas pequena
 }
 
@@ -214,17 +217,17 @@ a[target="_blank"] {
 // Los botones primarios con los colores de la tienda.
 // Bootstrap lee sus colores de variables --bs-...: aqui se les dan otros valores
 .btn-primary {
-    --bs-btn-bg: var(--color-principal);               // fondo del boton: verde
-    --bs-btn-border-color: var(--color-principal);     // borde: verde
-    --bs-btn-hover-bg: var(--color-acento);            // con el mouse encima: fondo amarillo
-    --bs-btn-hover-border-color: var(--color-acento);  // y borde amarillo
-    --bs-btn-hover-color: #1F2933;                     // y letra oscura
+    --bs-btn-bg: var(--color-principal);               // fondo del boton: verde musgo oscuro
+    --bs-btn-border-color: var(--color-principal);     // borde: verde musgo oscuro
+    --bs-btn-hover-bg: var(--color-resalte);           // con el mouse encima: fondo verde manzana
+    --bs-btn-hover-border-color: var(--color-resalte); // y borde verde manzana
+    --bs-btn-hover-color: #2E4302;                     // y letra verde musgo muy oscuro
 }
 
-// El aviso (alert) con el amarillo de la tienda
+// El aviso (alert) con el azul de la tienda
 .alert-warning {
-    background-color: #FFF8E1;              // fondo amarillo muy claro
-    border-color: $color-acento;            // borde amarillo
+    background-color: $color-suave;         // fondo azul claro
+    border-color: $color-acento;            // borde azul
     border-left: 6px solid $color-acento;   // borde grueso a la izquierda
     border-radius: $radio;                  // esquinas redondeadas
 }

@@ -5,11 +5,12 @@
 // =============================================================
 
 // --- Variables de Sass: empiezan con $ y solo existen al compilar ---
-$color-principal: #1B5E20;   // verde oscuro: encabezado y titulos
-$color-acento: #F9A825;      // amarillo: precios y detalles
-$color-fondo: #F4F7F2;       // gris verdoso muy claro: fondo
-$color-texto: #1F2933;       // casi negro: el texto
-$color-suave: #DDEBDD;       // verde claro: bordes y filas
+$color-principal: #4B6B03;   // Dark Moss Green (verde musgo oscuro): encabezado, titulos y botones
+$color-acento: #4E90F5;      // Chefchaouen Blue (azul): bordes y detalles
+$color-fondo: #F3F6F3;       // Baby Powder (blanco): fondo de la pagina
+$color-texto: #2E4302;       // verde musgo muy oscuro (tono derivado de Dark Moss Green): el texto
+$color-suave: #9EBEED;       // Jordy Blue (azul claro): bordes, etiquetas y filas
+$color-resalte: #94C000;     // Apple Green (verde manzana): botones al pasar el mouse
 $radio: 12px;                // esquinas redondeadas
 $sombra: 0 4px 12px rgba(0, 0, 0, 0.12);   // sombra suave: abajo 4px, difuminada 12px, negro al 12 %
 
