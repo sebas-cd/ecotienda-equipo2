@@ -1,7 +1,7 @@
 // Constante tarifaria oficial para cálculos (COP por kWh)
 const TARIFA_ENERGIA_KWH = 950;
 
-// Arreglo de objetos literales: Mínimo 8 productos en 3 categorías
+// Arreglo de objetos literales
 const productos = [
     {
         id: 1,
@@ -90,7 +90,7 @@ const productos = [
 let carrito = [];
 
 // ==========================================
-// FUNCIONES OBLIGATORIAS (Mínimo 4)
+// FUNCIONES OBLIGATORIAS
 // ==========================================
 
 // 1. Calcula el ahorro mensual en kWh (30 días)
