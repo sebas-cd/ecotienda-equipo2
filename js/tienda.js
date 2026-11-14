@@ -1,15 +1,16 @@
-// Constante tarifaria oficial para cálculos (COP por kWh)
+// Constantes tarifarias y ambientales (COP por kWh y kg CO2 por kWh en Colombia)
 const TARIFA_ENERGIA_KWH = 950;
+const FACTOR_EMISION_CO2 = 0.164;
 
-// Arreglo de objetos literales
+// Arreglo de objetos literales: 9 productos en 3 categorías
 const productos = [
     {
         id: 1,
         nombre: "Bombillo LED 9W Luz Cálida",
         categoria: "iluminacion",
         precio: 12000,
-        potenciaViejo: 60, // Watts equipo anterior
-        potenciaNuevo: 9,   // Watts equipo nuevo
+        potenciaViejo: 60,
+        potenciaNuevo: 9,
         horasDia: 6
     },
     {
@@ -27,7 +28,7 @@ const productos = [
         categoria: "solar",
         precio: 145000,
         potenciaViejo: 150,
-        potenciaNuevo: 0, // Aislado de la red: consumo de red = 0W
+        potenciaNuevo: 0,
         horasDia: 10
     },
     {
@@ -46,7 +47,7 @@ const productos = [
         precio: 2150000,
         potenciaViejo: 380,
         potenciaNuevo: 140,
-        horasDia: 12 // Ciclo promedio de compresión
+        horasDia: 12
     },
     {
         id: 6,
@@ -90,7 +91,7 @@ const productos = [
 let carrito = [];
 
 // ==========================================
-// FUNCIONES OBLIGATORIAS
+// FUNCIONES PROPIAS (Cálculos y Formatos)
 // ==========================================
 
 // 1. Calcula el ahorro mensual en kWh (30 días)
@@ -113,7 +114,7 @@ function formatearPesos(valor) {
     }).format(valor);
 }
 
-// 4. Retorna el nombre legible y etiqueta de la categoría
+// 4. Retorna el nombre legible de la categoría
 function obtenerNombreCategoria(codigoCategoria) {
     const categorias = {
         iluminacion: "Iluminación Eficiente",
@@ -123,8 +124,19 @@ function obtenerNombreCategoria(codigoCategoria) {
     return categorias[codigoCategoria] || "General";
 }
 
+// 5. Función nueva: Calcula los kg de CO2 evitados al mes
+function calcularReduccionCO2(kwhAhorrados) {
+    return (kwhAhorrados * FACTOR_EMISION_CO2).toFixed(2);
+}
+
+// 6. Función nueva: Elimina un producto específico del carrito por su índice
+function eliminarDelCarrito(indice) {
+    carrito.splice(indice, 1);
+    actualizarCarrito();
+}
+
 // ==========================================
-// RENDERIZADO DEL CATÁLOGO
+// RENDERIZADO DEL CATÁLOGO EN EL DOM
 // ==========================================
 const contenedorProductos = document.querySelector("#productos");
 
@@ -140,6 +152,7 @@ function renderizarProductos(lista) {
     lista.forEach(producto => {
         const ahorroKwh = calcularAhorroKwhMes(producto.potenciaViejo, producto.potenciaNuevo, producto.horasDia);
         const ahorroPesos = calcularAhorroPesosMes(ahorroKwh);
+        const co2Evitado = calcularReduccionCO2(ahorroKwh);
 
         html += `
             <article class="tarjeta">
@@ -147,10 +160,13 @@ function renderizarProductos(lista) {
                     <span class="badge bg-secondary mb-2">${obtenerNombreCategoria(producto.categoria)}</span>
                     <h3>${producto.nombre}</h3>
                     <p class="badge-potencia">
-                        Sustituye equipo de ${producto.potenciaViejo} W por ${producto.potenciaNuevo} W (${producto.horasDia} h/día).
+                        Reemplaza equipo de ${producto.potenciaViejo} W por ${producto.potenciaNuevo} W (${producto.horasDia} h/día).
                     </p>
-                    <p class="ahorro-resaltado">
+                    <p class="ahorro-resaltado mb-1">
                         Ahorro: ~${ahorroKwh.toFixed(1)} kWh/mes (${formatearPesos(ahorroPesos)}/mes)
+                    </p>
+                    <p class="small text-muted mb-2">
+                        Impacto ambiental: Evita <strong>${co2Evitado} kg de CO₂</strong>/mes
                     </p>
                 </div>
                 <div>
@@ -168,7 +184,7 @@ function renderizarProductos(lista) {
 }
 
 // ==========================================
-// FILTROS Y BUSCADOR
+// FILTROS Y BUSCADOR EN TIEMPO REAL
 // ==========================================
 let categoriaActual = "todas";
 let terminoBusqueda = "";
@@ -189,7 +205,7 @@ function aplicarFiltrosYBusqueda() {
     renderizarProductos(resultado);
 }
 
-// Botones de filtro de categoría
+// Botones de filtro por categoría
 const botonesFiltro = document.querySelectorAll(".filtro");
 botonesFiltro.forEach(boton => {
     boton.addEventListener("click", () => {
@@ -211,7 +227,7 @@ if (inputBuscador) {
 }
 
 // ==========================================
-// GESTIÓN DEL CARRITO
+// GESTIÓN DINÁMICA DEL CARRITO
 // ==========================================
 function asignarEventosAgregar() {
     const botonesAgregar = document.querySelectorAll(".btn-agregar");
@@ -250,7 +266,12 @@ function actualizarCarrito() {
         const li = document.createElement("li");
         li.innerHTML = `
             <span>${item.nombre}</span>
-            <span><strong>${formatearPesos(item.precio)}</strong></span>
+            <div class="d-flex align-items-center gap-2">
+                <strong>${formatearPesos(item.precio)}</strong>
+                <button class="btn btn-outline-danger btn-sm py-0 px-2" onclick="eliminarDelCarrito(${index})" title="Quitar producto">
+                    ×
+                </button>
+            </div>
         `;
         listaCarrito.appendChild(li);
     });
@@ -266,7 +287,7 @@ function actualizarCarrito() {
     }
 }
 
-// Botón para vaciar carrito
+// Botón para vaciar todo el carrito
 const botonVaciar = document.querySelector("#vaciar");
 if (botonVaciar) {
     botonVaciar.addEventListener("click", () => {
@@ -275,7 +296,7 @@ if (botonVaciar) {
     });
 }
 
-// Carga inicial
+// Renderizado inicial al cargar la página
 document.addEventListener("DOMContentLoaded", () => {
     renderizarProductos(productos);
 });
